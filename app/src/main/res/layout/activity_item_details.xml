@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Activity.ItemDetailsActivity">
+
+    <TextView
+        android:id="@+id/item_name"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:gravity="center|start"
+        android:text="@string/name"
+        android:textSize="23sp"
+        android:textStyle="bold"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:gravity="center|left"
+        android:paddingHorizontal="10dp"
+        android:text="Amount"
+        android:textColor="#FF5722"
+        android:textSize="23dp"
+        android:textStyle="bold"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/edit_item_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="514dp" />
+
+    <TextView
+        android:id="@+id/item_total"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:gravity="center|end"
+        android:paddingRight="10dp"
+        android:text="@string/total"
+        android:textSize="23dp" />
+
+</LinearLayout>
