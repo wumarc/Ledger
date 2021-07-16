@@ -8,30 +8,83 @@
     android:gravity="center"
     tools:context=".Activity.LoginActivity">
 
+    <LinearLayout
+        android:layout_width="@dimen/_260sdp"
+        android:layout_height="@dimen/_170sdp"
+        android:gravity="center"
+        android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/EmailAddress"
+        <com.google.android.material.textfield.TextInputLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_25sdp"
+            android:layout_marginRight="@dimen/_25sdp"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:hint="@string/email">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/EmailAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:maxLines="1" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_25sdp"
+            android:layout_marginRight="@dimen/_25sdp"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:hint="@string/fui_password_hint">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/Password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:maxLines="1" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <Button
+            android:id="@+id/login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/_25sdp"
+            android:paddingRight="@dimen/_25sdp"
+            android:text="LOGIN" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:hint="Email"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:ems="10"
-        android:inputType="textEmailAddress" />
+        android:layout_height="wrap_content" >
 
-    <EditText
-        android:id="@+id/Password"
-        android:layout_width="wrap_content"
-        android:hint="Password"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:ems="10"
-        android:inputType="textPassword" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Don't have an account? " />
 
-    <Button
-        android:id="@+id/login"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:text="log in" />
+        <TextView
+            android:id="@+id/signup_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sign up"
+            android:textColor="#3A3939"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="!" />
+
+    </LinearLayout>
+
+
 
 
 </LinearLayout>

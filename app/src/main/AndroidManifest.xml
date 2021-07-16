@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Ledger">
-        <activity android:name=".Activity.ItemDetailsActivity"></activity>
+        <activity android:name=".Activity.DeleteAccountActivity"></activity>
+        <activity android:name=".Activity.Signup" />
+        <activity android:name=".Activity.ItemDetailsActivity" />
         <activity android:name=".Activity.MenuActivity" />
         <activity android:name=".Activity.LoginActivity">
             <intent-filter>

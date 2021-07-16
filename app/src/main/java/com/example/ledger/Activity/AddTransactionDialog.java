@@ -4,43 +4,31 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.SystemClock;
-import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Spinner;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.appcompat.widget.SwitchCompat;
-
-import com.example.ledger.Class.Item;
 import com.example.ledger.Class.Transaction;
 import com.example.ledger.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.database.annotations.NotNull;
-
-import java.io.ObjectStreamException;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class AddTransactionDialog extends AppCompatDialogFragment {
 
     private static FirebaseDatabase databaseRoot = FirebaseDatabase.getInstance();
-    private static DatabaseReference itemsDbRef = databaseRoot.getReference().child("items");
+    private static FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+    private DatabaseReference userDbRef = databaseRoot.getReference().child(currentUser.getUid());
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -49,21 +37,24 @@ public class AddTransactionDialog extends AppCompatDialogFragment {
         LayoutInflater inflater = requireActivity().getLayoutInflater(); // Get the layout inflater
         View view = inflater.inflate(R.layout.activity_add_transaction_dialog, null);
         EditText amount = view.findViewById(R.id.amount);
+        EditText description = view.findViewById(R.id.description);
         SwitchCompat switchBtn = view.findViewById(R.id.switch1);
         Spinner itemSpinner = view.findViewById(R.id.spinner);
+        List<String> items = new ArrayList<String>();
+        List<String> keys = new ArrayList<String>();
 
         // Fill spinner with items
-        itemsDbRef.addValueEventListener(new ValueEventListener() {
+        userDbRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                List<String> items = new ArrayList<String>();
-                for(DataSnapshot itemSnapShot : snapshot.getChildren()) { // Get keys to display in the spinner
-                  String itemName = itemSnapShot.getKey();
-                  items.add(itemName);
+                for(DataSnapshot itemSnapShot : snapshot.getChildren()) {
+                    Map<String, Object> map = (Map<String, Object>) itemSnapShot.getValue(); //map each variable of the item
+                    items.add(map.get("name").toString());
+                    keys.add(itemSnapShot.getKey());
                 }
 
                 // Add data to the spinner
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, items);
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item, items);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 itemSpinner.setAdapter(adapter);
             }
@@ -77,16 +68,15 @@ public class AddTransactionDialog extends AppCompatDialogFragment {
                     @RequiresApi(api = Build.VERSION_CODES.O) // TODO ?
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        String item = itemSpinner.getSelectedItem().toString();
-
                         // Get transaction data
+                        String item = itemSpinner.getSelectedItem().toString();
+                        String key = keys.get(items.indexOf(item));
+                        String descriptionStr = description.getText().toString();
                         double amountDle = Double.parseDouble(amount.getText().toString());
-                        boolean debit = switchBtn.isChecked();
-                        long time = SystemClock.uptimeMillis();
+                        boolean debit = !switchBtn.isChecked();
+                        Transaction transaction = new Transaction(amountDle, debit, descriptionStr, System.currentTimeMillis());
 
-                        Transaction transaction = new Transaction(amountDle, debit, time);
-
-                        itemsDbRef.child(item).child("transactions").addListenerForSingleValueEvent(new ValueEventListener() {
+                        userDbRef.child(key).child("transactions").addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 if (snapshot.exists()) { //rewrite
@@ -96,11 +86,11 @@ public class AddTransactionDialog extends AppCompatDialogFragment {
                                         transactions.add(singleTransaction);
                                     }
                                     transactions.add(transaction);
-                                    itemsDbRef.child(item).child("transactions").setValue(transactions);
+                                    userDbRef.child(key).child("transactions").setValue(transactions);
                                 } else { // add a new list
                                     ArrayList<Transaction> transactions = new ArrayList<Transaction>();
                                     transactions.add(transaction);
-                                    itemsDbRef.child(item).child("transactions").setValue(transactions);
+                                    userDbRef.child(key).child("transactions").setValue(transactions);
                                 }
                             }
                             @Override

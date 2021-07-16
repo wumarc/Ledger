@@ -4,6 +4,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.ledger.Class.Item;
@@ -36,7 +38,20 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Item item = itemsList.get(position);
         holder.name.setText(item.getName());
-        holder.sum.setText(String.valueOf(item.getSum()));
+        double number = item.getSum();
+        if (item.getSum() >= 0) {
+            String total = "$" + String.valueOf(item.getSum());
+            holder.sum.setText(total);
+        } else {
+            String total = "-$" + String.valueOf(item.getSum()).replace("-", "");
+            holder.sum.setText(total);
+        }
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return itemsList.size();
     }
 
     public interface OnItemClickListener {
@@ -47,12 +62,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
         mListener = listener;
     }
 
-    @Override
-    public int getItemCount() {
-        return itemsList.size();
-    }
-
-
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView name, sum;
@@ -61,8 +70,6 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
             super(view);
             name = view.findViewById(R.id.adapter_name);
             sum = view.findViewById(R.id.adapter_total);
-
-
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -74,9 +81,9 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.ViewHolder> {
                     }
                 }
             });
-
         }
+
     }
-    
-    
+
+
 }

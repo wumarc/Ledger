@@ -2,14 +2,14 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp" >
+    android:layout_margin="@dimen/_5sdp" >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/bisque"
         android:orientation="vertical"
-        android:padding="8dp">
+        android:padding="@dimen/_5sdp">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -18,9 +18,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:padding="5dp"
-                android:paddingBottom="15dp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:padding="@dimen/_5sdp"
+                android:textSize="@dimen/_13sdp"
+                android:paddingBottom="@dimen/_10sdp"
                 android:text="@string/name"
                 android:textStyle="bold" />
 
@@ -28,9 +29,10 @@
                 android:id="@+id/adapter_name"
                 android:layout_width="wrap_content"
                 android:textStyle="bold"
-                android:layout_marginBottom="10dp"
-                android:padding="5dp"
-                android:layout_marginLeft="8dp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:padding="@dimen/_5sdp"
+                android:textSize="@dimen/_13sdp"
+                android:layout_marginLeft="5dp"
                 android:paddingBottom="15dp"
                 android:layout_height="wrap_content"
                 android:text="@string/item_name"
@@ -46,23 +48,25 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:padding="5dp"
-                android:paddingTop="15dp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:padding="@dimen/_5sdp"
+                android:paddingTop="@dimen/_15sdp"
+                android:textSize="@dimen/_13sdp"
                 android:text="@string/total"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/adapter_total"
-                android:layout_width="wrap_content"
-                android:textStyle="bold"
-                android:layout_marginBottom="10dp"
-                android:padding="5dp"
-                android:layout_marginLeft="8dp"
-                android:paddingBottom="15dp"
+                android:layout_width="@dimen/_104sdp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginBottom="@dimen/_5sdp"
+                android:padding="@dimen/_5sdp"
+                android:paddingBottom="@dimen/_15sdp"
                 android:text="@string/item_total"
-                android:layout_marginStart="8dp" />
+                android:textSize="@dimen/_13sdp"
+                android:textStyle="bold"
+                android:layout_marginLeft="@dimen/_8sdp" />
 
         </LinearLayout>
 

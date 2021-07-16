@@ -1,5 +1,6 @@
 package com.example.ledger.Adapter;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +10,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.ledger.Class.Transaction;
 import com.example.ledger.R;
 
-import java.util.ArrayList;
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.ViewHolder> {
 
@@ -36,13 +39,18 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Transaction transaction = transactionsList.get(position);
         if (transaction.isDebit()) {
-            String text = "-$" + String.valueOf(transaction.getAmount());
+            String text = "-$" + String.valueOf(new DecimalFormat("0.##").format(transaction.getAmount()));
+            holder.amount.setTextColor(Color.rgb(230, 0, 0));
             holder.amount.setText(text);
         } else {
-            String text = " $" + String.valueOf(transaction.getAmount());
+            String text = " $" + String.valueOf(new DecimalFormat("0.##").format(transaction.getAmount()));
+            holder.amount.setTextColor(Color.rgb(0, 102, 32));
             holder.amount.setText(text);
         }
-
+        Date date = new Date(transaction.getTime());
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMMM d");
+        holder.time.setText(String.valueOf(simpleDateFormat.format(date)));
+        holder.description.setText(transaction.getDescription());
     }
 
     @Override
@@ -59,11 +67,13 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView description, amount;
+        private TextView amount, time, description;
 
         public ViewHolder(View view, OnItemClickListener listener) {
             super(view);
             amount = view.findViewById(R.id.transaction_amount);
+            time = view.findViewById(R.id.date);
+            description = view.findViewById(R.id.transaction_description);
 
         }
 

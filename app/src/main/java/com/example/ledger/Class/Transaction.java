@@ -1,21 +1,20 @@
 package com.example.ledger.Class;
-
-
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Transaction {
 
     double amount;
     boolean debit;
+    String description;
     long time;
 
     public Transaction() {};
 
-    public Transaction(double amount, boolean debit, long time) {
+    public Transaction(double amount, boolean debit, String description, long time) {
         this.amount = amount;
         this.debit = debit;
         this.time = time;
+        this.description = description;
     }
 
     public double getAmount() {
@@ -42,16 +41,17 @@ public class Transaction {
         this.time = time;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public void setTransactionType(boolean transactionType) {
         this.debit = transactionType;
     }
 
-    public Map<String, Object> toMap() {
-        HashMap<String, Object> result = new HashMap<>();
-        result.put("amount", amount);
-        result.put("debit", debit);
-        result.put("time", time);
 
-        return result;
-    }
 }

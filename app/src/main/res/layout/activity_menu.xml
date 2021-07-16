@@ -7,30 +7,22 @@
     android:layout_height="match_parent"
     tools:context=".Activity.MenuActivity">
 
-    <LinearLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="679dp"
-            tools:layout_editor_absoluteX="1dp"
-            tools:layout_editor_absoluteY="74dp" />
-
-    </LinearLayout>
+        android:layout_height="match_parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:layout_marginRight="@dimen/_10sdp"
         android:background="@color/fui_transparent"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:src="@drawable/ic_baseline_add_24" />
-
 
 </RelativeLayout>
