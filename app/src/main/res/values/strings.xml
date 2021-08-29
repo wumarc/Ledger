@@ -7,7 +7,6 @@
         <item>debit</item>
     </string-array>
     <string name="add_a_new_item">Add a new item</string>
-    <string name="amount">Amount</string>
     <string name="debit">Debit</string>
     <string name="debit_credit">Debit / Credit</string>
     <string name="name">Name: </string>
@@ -22,6 +21,7 @@
     <string name="account_details">Account details</string>
     <string name="create_a_new_account">Create a new account</string>
     <string name="delete_my_account">Delete my account</string>
+    <string name="amount">Amount</string>
 
 
 </resources>

@@ -10,9 +10,17 @@
 
     <LinearLayout
         android:layout_width="@dimen/_260sdp"
-        android:layout_height="@dimen/_170sdp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
         android:gravity="center"
+        android:layout_marginBottom="@dimen/_80sdp"
         android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_100sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:src="@drawable/ledger"/>
 
         <com.google.android.material.textfield.TextInputLayout
 
@@ -57,6 +65,14 @@
             android:paddingLeft="@dimen/_25sdp"
             android:paddingRight="@dimen/_25sdp"
             android:text="LOGIN" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:id="@+id/forgot_password"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="Forgot password?" />
 
     </LinearLayout>
 
