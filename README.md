@@ -10,7 +10,7 @@
 ## Features
 Ledger lets you:
 
-* Create multiple categories so you can isolate the cash flow of each category
+* Create multiple ledgers so you can isolate the cash flow of each category
 * Add, update, remove and edit transactions
 * Add a descripton for each transaction
 
